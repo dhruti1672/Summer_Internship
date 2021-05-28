@@ -7,14 +7,15 @@ if(!isset($_SESSION['email']))
 }
 if(isset($_GET['did']))
 {
-    $deleteq =    mysqli_query($connection, "delete from package_master where package_id ='{$_GET['did']}'") or die(mysqli_error($connection));
+    $deleteq =    mysqli_query($connection, "delete from img_master where img_id ='{$_GET['did']}'") or die(mysqli_error($connection));
      
   if($deleteq)
   { 
-      echo '<script>alert("Package Deleted")</script>';
+      echo '<script>alert("Image Deleted")</script>';
     }
 }
-$q= mysqli_query($connection,"select * from package_master order by package_id desc");
+$q= mysqli_query($connection,"select * from img_master order by img_id desc");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,50 +64,31 @@ $q= mysqli_query($connection,"select * from package_master order by package_id d
               <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                    <h3 class="font-weight-bold" style="text-align: center">Package Display</h3>
+                    <h3 class="font-weight-bold" style="text-align: center">Image Display</h3>
                  <br/>
                   
                   <div class="table-responsive">
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Availability</th>
-                          <th>Flights Inclusion</th>
-                          <th>Total Nights</th>
-                          <th>Starting Range</th>
+                          <th>Hotel Name</th>
                           <th>Image</th>
                           <th>Edit Information</th>
                          
                         </tr>
                       </thead>
                       <tbody>
-                       <?php
-                             while ($row = mysqli_fetch_array($q)) {
-                                 
-                             
+                        <?php
+                          
+                          while ($row = mysqli_fetch_array($q)) {
+                              $q1= mysqli_query($connection, "select * from hotel_master where hotel_id='{$row['hotel_id']}'") or die("error". mysqli_error($connection));   
+                             $row1= mysqli_fetch_array($q1);
                        ?>
                         <tr>
-                            <td><?php echo $row['package_name']; ?></td>
-                          <?php 
-                          if($row['package_available']==0)
-                          {
-                              ?>
-                          <td><label class="badge badge-danger">Not Available <?php } else{ ?></label></td>
-                          <td><label class="badge badge-success">Available <?php } ?></label></td>
-                          
-                          <?php 
-                          if($row['flight_include']==0)
-                          {
-                              ?>
-                          <td><label class="badge badge-danger">Not Included <?php } else{ ?></label></td>
-                          <td><label class="badge badge-success">Included <?php } ?></label></td>
-                          
-                          <td><?php echo $row['package_nights']; ?></td>
-                          <td>INR <?php echo $row['package_from']; ?></td>
-                          <td><img src="upload/<?php echo $row['package_img']?>" Style="width: 200px; height:160px; border-radius: 2px;"></td>
-                          <td><a href="edit_package.php?eid=<?php echo $row['package_id']; ?>"><button type="button" class="btn btn-primary">Edit</button></a>
-                              <a href="view_package.php?did=<?php echo $row['package_id']; ?>"><button type="button" class="btn btn-danger">Delete</button></a> <br/><br/></td>
+                            <td><?php echo $row1['hotel_name']; ?></td>
+                          <td><img src="upload/<?php echo $row['img_url']?>" Style="width: 200px; height:160px; border-radius: 2px;"></td>
+                          <td><a href="edit_image.php?eid=<?php echo $row['img_id']; ?>"><button type="button" class="btn btn-primary">Edit</button></a>
+                              <a href="view_image.php?did=<?php echo $row['img_id']; ?>"><button type="button" class="btn btn-danger">Delete</button></a> <br/><br/></td>
                         </tr>
                              <?php } ?> 
                       </tbody>

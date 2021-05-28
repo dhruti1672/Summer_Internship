@@ -1,42 +1,42 @@
 <?php
  session_start();
  require '../class/atclass.php';
- if(!isset($_SESSION['email']))
+ $eid=$_GET["eid"];
+if(!isset($_GET['eid']))
 {
-    header("location:login.php");
+    header("location:view_hotel.php");
 }
 
- 
- if(isset($_POST['submit']))
+
+ if($_POST)
  {
      $name= mysqli_real_escape_string($connection,$_POST['name']);
+     $add= mysqli_real_escape_string($connection,$_POST['add']);
      $nights= mysqli_real_escape_string($connection,$_POST['nights']);
+     $pack_id= mysqli_real_escape_string($connection,$_POST['pack_id']);
      $price= mysqli_real_escape_string($connection,$_POST['price']);
-     $desc= mysqli_real_escape_string($connection,$_POST['desc']);
-     $pack_id= mysqli_real_escape_string($connection,$_POST['package_id']);
-      $f=$_FILES['img'];
+     $f=$_FILES['img'];
      $file = $_FILES['img']['name'];
         
-if($f['type']=="image/jpeg" || $f['type']=="image/png")
-{
-        move_uploaded_file($_FILES['img']['tmp_name'], "upload/" . $file);  
-        
-    $insertquery = mysqli_query($connection, "INSERT INTO `hotel_master`(`package_id`, `hotel_name`, `hotel_address`, `hotel_night`, `hotel_price`, `hotel_img`) 
-        VALUES('{$pack_id}','{$name}','{$desc}','{$nights}','{$price}','{$file}')") or die("Error In Query" . mysqli_error($connection));
-    
-        if ($insertquery) {
+    if($f['type']=="image/jpeg" || $f['type']=="image/png")
+    {
+            move_uploaded_file($_FILES['img']['tmp_name'], "upload/" . $file);  
 
+           $updateq = mysqli_query($connection, "UPDATE `hotel_master` SET `hotel_name`='{$name}',`package_id`='{$pack_id}',`hotel_address`='{$add}',`hotel_night`='{$nights}',`hotel_price`='{$price}',`hotel_img`='{$file}' WHERE hotel_id='{$eid}'") or die("Error In Query" . mysqli_error($connection));
 
-      echo "<script>alert('Hotel Added Successfully.');window.location='add_hotel.php';</script>";
-     
-       
-        }
-}
- else {
-    echo "<script>alert('only jpeg and png image is allowed');window.location='add_package.php';</script>";
-}
-}
- 
+            if ($updateq) {
+
+               echo "<script>alert('Hotel Updated Successfully.');window.location='view_hotel.php';</script>";
+
+            }  
+
+     }
+     else {
+        echo "<script>alert('only jpeg and png image is allowed');window.location='view_hotel.php';</script>";
+    }
+ }
+  $q= mysqli_query($connection,"select * from hotel_master where hotel_id='{$eid}'"); 
+
  
  ?>
 <!DOCTYPE html>
@@ -88,26 +88,45 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title">Add Hotel Information</h3>
-                  <p class="card-description">
-                    Hotel Information
-                  </p>
+                  <h3 class="card-title">Update Hotel Information</h3>
+                  <br/>
                   <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
+                        <?php
+                            $row= mysqli_fetch_array($q);
+                            
+                             $q1= mysqli_query($connection, "select * from package_master ") or die("error". mysqli_error($connection));   
+                             
+                        ?>
+                        <input type="hidden" name="packid" value="<?php  $row['hotel_id'];?>">
                       <label for="exampleInputName1">Hotel Name</label>
-                      <input type="text" name="name" class="form-control" id="exampleInputName1" placeholder="Name">
+                      <input type="text" name="name" class="form-control" id="exampleInputName1" value="<?php  echo $row['hotel_name'];?>">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputName2">Hotel Package Nights</label>
-                      <input type="text" name="nights" class="form-control" id="exampleInputName1" placeholder="Total Nights">
+                      <label for="exampleInputName2">Total Nights</label>
+                      <input type="text" name="nights" class="form-control" id="exampleInputName1"  value="<?php echo $row['hotel_night'];?>">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputName3">Hotel Price</label>
-                      <input type="text" name="price" class="form-control" id="exampleInputName1" placeholder="Starting range">
+                      <input type="text" name="price" class="form-control" id="exampleInputName1" value="<?php echo $row['hotel_price'];?>" >
                     </div>
+                    <div class="form-group">
+                      <label for="exampleSelectGender">Package Name</label>
+                      <select class="form-control" name="pack_id" id="exampleSelectGender">
+                         <?php while ($row1= mysqli_fetch_array($q1)) {
+                                
+                            ?>
+                          <option value="<?php echo $row1['package_id']?>"><?php echo $row1['package_name']?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
                       <div class="form-group">
+                      <label for="exampleInputName2">Hotel Address</label>
+                      <input type="text" name="add" class="form-control" id="exampleInputName1"  value="<?php echo $row['hotel_address'];?>">
+                    </div>
+                    <div class="form-group">
                       <label>upload Image</label>
-                      <input type="file" name="img" class="file-upload-default">
+                      <input type="file" name="img" class="file-upload-default" >
                       <div class="input-group col-xs-12">
                         <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                         <span class="input-group-append">
@@ -115,26 +134,9 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
                         </span>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="exampleSelectGender">Package Place</label>
-                      <select class="form-control" name="package_id" id="exampleSelectGender">
-                          <?php
-                                    $sc= mysqli_query($connection,"select * from package_master") or die("error");
-                                    while($row=mysqli_fetch_array($sc))
-                                    {
-                                        echo "<option value='{$row['package_id']}'>{$row['package_name']}</option>";
-                                     }
-                           ?>
-                           
-                        </select>
-                      </div>
-                    
-                    <div class="form-group">
-                      <label for="exampleTextarea1">Hotel Address</label>
-                      <textarea class="form-control" name="desc" id="exampleTextarea1" rows="2"></textarea>
-                    </div>
-                      <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button type="reset" class="btn btn-light">Cancel</button>
+                   
+                      <button type="submit" name="submit" class="btn btn-primary mr-2">Update</button>
+                      <button type="reset" class="btn btn-light" onclick="window.location='view_hotel.php'">Cancel</button>
                   </form>
                 </div>
               </div>

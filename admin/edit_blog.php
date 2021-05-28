@@ -1,43 +1,38 @@
 <?php
  session_start();
  require '../class/atclass.php';
- if(!isset($_SESSION['email']))
+ $eid=$_GET["eid"];
+if(!isset($_GET['eid']))
 {
-    header("location:login.php");
+    header("location:view_blog.php");
 }
 
- 
- if(isset($_POST['submit']))
+
+ if($_POST)
  {
      $name= mysqli_real_escape_string($connection,$_POST['name']);
-     $nights= mysqli_real_escape_string($connection,$_POST['nights']);
-     $price= mysqli_real_escape_string($connection,$_POST['price']);
-     $desc= mysqli_real_escape_string($connection,$_POST['desc']);
-     $pack_id= mysqli_real_escape_string($connection,$_POST['package_id']);
-      $f=$_FILES['img'];
+     $url= mysqli_real_escape_string($connection,$_POST['url']);
+     $f=$_FILES['img'];
      $file = $_FILES['img']['name'];
         
-if($f['type']=="image/jpeg" || $f['type']=="image/png")
-{
-        move_uploaded_file($_FILES['img']['tmp_name'], "upload/" . $file);  
-        
-    $insertquery = mysqli_query($connection, "INSERT INTO `hotel_master`(`package_id`, `hotel_name`, `hotel_address`, `hotel_night`, `hotel_price`, `hotel_img`) 
-        VALUES('{$pack_id}','{$name}','{$desc}','{$nights}','{$price}','{$file}')") or die("Error In Query" . mysqli_error($connection));
-    
-        if ($insertquery) {
+    if($f['type']=="image/jpeg" || $f['type']=="image/png")
+    {
+            move_uploaded_file($_FILES['img']['tmp_name'], "upload/" . $file);  
+            
+           $updateq = mysqli_query($connection, "UPDATE `blog_master` SET `blog_name`='{$name}',`blog_url`='{$url}',`blog_img`='{$file}' WHERE blog_id='{$eid}'") or die("Error In Query" . mysqli_error($connection));
 
+            if ($updateq) {
 
-      echo "<script>alert('Hotel Added Successfully.');window.location='add_hotel.php';</script>";
-     
-       
-        }
-}
- else {
-    echo "<script>alert('only jpeg and png image is allowed');window.location='add_package.php';</script>";
-}
-}
- 
- 
+               echo "<script>alert('Blog Updated Successfully.');window.location='view_blog.php';</script>";
+
+            }  
+
+     }
+     else {
+        echo "<script>alert('only jpeg and png image is allowed');window.location='view_blog.php';</script>";
+    }
+ }
+ $q= mysqli_query($connection,"select * from blog_master where blog_id='{$eid}'"); 
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,26 +83,27 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title">Add Hotel Information</h3>
-                  <p class="card-description">
-                    Hotel Information
-                  </p>
+                  <h3 class="card-title">Update Image</h3>
+                  <br/>
                   <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                      <label for="exampleInputName1">Hotel Name</label>
-                      <input type="text" name="name" class="form-control" id="exampleInputName1" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName2">Hotel Package Nights</label>
-                      <input type="text" name="nights" class="form-control" id="exampleInputName1" placeholder="Total Nights">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputName3">Hotel Price</label>
-                      <input type="text" name="price" class="form-control" id="exampleInputName1" placeholder="Starting range">
-                    </div>
+                        <?php
+                            $row= mysqli_fetch_array($q);
+                            
+                        ?>
+                        <input type="hidden" name="packid" value="<?php  $row['blog_id'];?>">
+                      
+                      <label for="exampleSelectGender">Blog Name</label>
+                     <input type="text" name="name" class="form-control" id="exampleInputName1" value="<?php  echo $row['blog_name'];?>">
+                      </div>
                       <div class="form-group">
+                        <label for="exampleSelectGender">Blog url</label>
+                        <input type="text" name="url" class="form-control" id="exampleInputName1" value="<?php  echo $row['blog_url'];?>">
+                      </div>
+                      
+                    <div class="form-group">
                       <label>upload Image</label>
-                      <input type="file" name="img" class="file-upload-default">
+                      <input type="file" name="img" class="file-upload-default" >
                       <div class="input-group col-xs-12">
                         <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                         <span class="input-group-append">
@@ -115,26 +111,9 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
                         </span>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="exampleSelectGender">Package Place</label>
-                      <select class="form-control" name="package_id" id="exampleSelectGender">
-                          <?php
-                                    $sc= mysqli_query($connection,"select * from package_master") or die("error");
-                                    while($row=mysqli_fetch_array($sc))
-                                    {
-                                        echo "<option value='{$row['package_id']}'>{$row['package_name']}</option>";
-                                     }
-                           ?>
-                           
-                        </select>
-                      </div>
-                    
-                    <div class="form-group">
-                      <label for="exampleTextarea1">Hotel Address</label>
-                      <textarea class="form-control" name="desc" id="exampleTextarea1" rows="2"></textarea>
-                    </div>
-                      <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-                    <button type="reset" class="btn btn-light">Cancel</button>
+                   
+                      <button type="submit" name="submit" class="btn btn-primary mr-2">Update</button>
+                      <button type="reset" class="btn btn-light" onclick="window.location='view_blog.php'">Cancel</button>
                   </form>
                 </div>
               </div>
