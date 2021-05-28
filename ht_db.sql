@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2021 at 08:22 AM
+-- Generation Time: May 28, 2021 at 04:40 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.1.20
 
@@ -45,6 +45,31 @@ INSERT INTO `admin_master` (`admin_id`, `admin_name`, `admin_email`, `admin_pass
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blog_master`
+--
+
+CREATE TABLE `blog_master` (
+  `blog_id` int(11) NOT NULL,
+  `blog_name` varchar(100) NOT NULL,
+  `blog_url` text NOT NULL,
+  `blog_img` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `blog_master`
+--
+
+INSERT INTO `blog_master` (`blog_id`, `blog_name`, `blog_url`, `blog_img`) VALUES
+(1, 'Coorg Trip From Bangalore: A Pocket Guide For Your Next Getaway In 2021!', 'https://traveltriangle.com/blog/coorg-trip-from-bangalore/', 'b1.jpg'),
+(2, '6 South Africa Travel Tips That Are A Must For Every Traveler', 'https://traveltriangle.com/blog/south-africa-travel-tips/', 'b2.jpg'),
+(3, '10 Manali Travel Tips To Vacay Like A Pro In This Himachali Paradise', 'https://traveltriangle.com/blog/manali-travel-tips/', 'b3.jpg'),
+(4, '30 Budget Trips In India For That Pocket-Friendly Escape In 2021!', 'https://traveltriangle.com/blog/budget-trips-in-india/', 'b4.jpg'),
+(5, 'Leh Travel Guide: Planning a Trip to Leh-Ladakh in 2021', 'https://meanderwander.com/trip-to-leh-ladakh/', 'b5.jpeg'),
+(6, 'The Most Romantic City in Italy ', 'https://travelforawhile.com/the-most-romantic-city-in-italy/', 'b6.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contact_us`
 --
 
@@ -74,15 +99,16 @@ CREATE TABLE `hotel_master` (
   `hotel_name` varchar(50) NOT NULL,
   `hotel_address` text NOT NULL,
   `hotel_night` int(11) NOT NULL,
-  `hotel_price` int(11) NOT NULL
+  `hotel_price` int(11) NOT NULL,
+  `hotel_img` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `hotel_master`
 --
 
-INSERT INTO `hotel_master` (`hotel_id`, `package_id`, `hotel_name`, `hotel_address`, `hotel_night`, `hotel_price`) VALUES
-(1, 1, 'Prince Residency', 'Village : Mehra Gaun, Bhimtal â€“ Bhowali Road, Bhimtal, District- Nainital (Uttarakhand) - 263136', 2, 7000);
+INSERT INTO `hotel_master` (`hotel_id`, `package_id`, `hotel_name`, `hotel_address`, `hotel_night`, `hotel_price`, `hotel_img`) VALUES
+(1, 3, 'Prince Residency', 'Mehra Gaun, Bhimtal ,Bhowali Road, Bhimtal, District, Nainital , 263136', 2, 10000, '11.jpg');
 
 -- --------------------------------------------------------
 
@@ -95,6 +121,13 @@ CREATE TABLE `img_master` (
   `hotel_id` int(11) NOT NULL,
   `img_url` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `img_master`
+--
+
+INSERT INTO `img_master` (`img_id`, `hotel_id`, `img_url`) VALUES
+(2, 1, '2.jpg');
 
 -- --------------------------------------------------------
 
@@ -158,8 +191,11 @@ CREATE TABLE `package_master` (
 --
 
 INSERT INTO `package_master` (`package_id`, `package_name`, `package_available`, `package_nights`, `flight_include`, `package_from`, `package_img`, `package_desc`) VALUES
-(1, 'Bhimtal', 1, 2, 0, 5000, 'bhimtal.jpeg', 'Bhimtal is an ancient place named after Bhima of Mahabharata. Bhimeshwara Mahadev Temple, an old Shiva temple in the bank of Bhimtal lake, is believed to have been built when Bhima visited the place during the banishment (vanvas) period of Pandavas. The present temple was built in the 17th century, by Baz Bahadur (1638â€“78 AD), a King of the Chand dynasty, and the Raja of Kumaon.[1]Archived 2008-06-18 at the Wayback Machine British Library.6).\r\n\r\nBhimtal is older than nearby Nainital as the city of Nainital is just 150â€“160 years old but Bhimtal is older than Nainital and Haldwami and was a stoppage onrute to old pedesterial road is still in use here and this road connects nearby Kathgodam to all Kumaon region and even to Nepal and Tibet. It might have been the part of the famous ancient silk route.\r\n\r\nAbout 2 km from Bhimtal is Nal Damyanti Tal, a small natural lake. It is believed that the palace of famous king Nala drowned into this lake. It is a very sacred place for the dwellers of the region. About 5 km from Bhimtal is the famous group of lakes known as Sattal, which is a place of attraction for nature lovers. Clear water of lakes surrounded by thick forest and voice of birds is a wonderful experience. Hill near the lake known as Hidimba Parvat. It gets its name from demon Hidimba of Mahabharata. Vankhandi Maharaj, a monk and environmentalist lives on the hill now, and has created a sanctuary for the wild animals around the hill. The area is known as Vankhandi Ashram.\r\n\r\nThe hill of Karkotaka is supposed to be named after Karkotaka, a mythical cobra. The hill is famous for its Nag temple in the region and on every Rishi Panchami thousands of people visit the temple and worship the Nag Karkotaka Maharaj. This is one of the famous nag temples situated in Uttarakhand region.\r\n\r\nSayad Baba ki mazar is a place where people from different part of Bhimtal and near around places come for worship on every Thursday. It is an example of unity in diversity as people from different religions (Hindu, Muslim, Sikh, Christian) visit this place, apart from this the centre of attraction of this mazar is its location. You can see the whole lake, dam and the island from their and also near around places like Jhangaliyagaon, Nakuchiyatal.'),
-(2, 'Statue Of Unity', 1, 1, 0, 7000, 'sou.jpg', 'The Statue of Unity is a colossal statue of Indian statesman and independence activist Vallabhbhai Patel (1875â€“1950), who was the first Deputy Prime Minister and Home Minister of independent India and an adherent of Mahatma Gandhi during the nonviolent Indian Independence movement. Patel was highly respected for his leadership in uniting 562 princely states of India with a major part of the former British Raj to form the single Union of India. The statue is located in the state of Gujarat, India. It is the world\'s tallest statue with a height of 182 metres (597 feet).[3] It is located on the Narmada River in the Kevadiya colony, facing the Sardar Sarovar Dam 100 kilometres (62 mi) southeast of the city of Vadodara[4] and 150 kilometres (93 mi) from Surat. Kevadia railway station is located at a distance of just 5 kilometres from Statue of Unity.[5][6]\r\n\r\nNarendra Modi first announced the project to commemorate Vallabhbhai Patel on 7 October 2013 at a press conference to mark the beginning of his 10th year as the Chief Minister of Gujarat. At the time, the project was dubbed, \"Gujarat\'s tribute to the nation\".[9]\r\n\r\nA separate Society named Sardar Vallabhbhai Patel Rashtriya Ekta Trust (SVPRET) was formed under the chairmanship of the Chief minister, Government of Gujarat, to execute the project.[9][10]\r\n\r\nAn outreach drive named the Statue of Unity Movement was started to support the construction of the statue. It helped collect the iron needed for the statue by asking farmers to donate their used farming instruments.[9][11] By 2016, a total of 135 metric tonnes of scrap iron had been collected and about 109 tonnes of it was used to make the foundation of the statue after processing.[12] A marathon titled Run For Unity was held on 15 December 2013 in Surat and Vadodara in support of the project.[13]\r\n\r\nThe project was first announced in 2010 and the construction of the statue started in October 2013 by Larsen & Toubro, with a total construction cost of â‚¹2700 crore (â‚¹27 billion; US$422 million).[7] It was designed by Indian sculptor Ram V. Sutar, and was inaugurated by Indian Prime Minister Narendra Modi on 31 October 2018, the 143rd anniversary of Sardar Patel\'s birth.[8]');
+(3, 'Bhimtal', 1, 2, 0, 7000, 'bhimtal.jpeg', 'Perched at a height of 1370masl, Bhimtal is an idyllic and less-crowded version of Nainital, 23 km away. Bhimtal is a scenic hill station, the charm of which lies in its off-beat, tranquil atmosphere. The picturesque Bhimtal Lake is a popular attraction for paddle boating, birding and nature walk.\r\n\r\nBounded by a dense forest of oaks, pine and shrubs, it is also known for a few ancient temples. The 17th-century Bhimeshwar Temple is a must-visit spot in the hilltown. Well connected by road, Bhimtal is an ideal weekend getaway from Delhi.'),
+(4, 'Statue Of Unity', 1, 4, 0, 9000, 'sou.jpg', 'Sardar Sarovar Dam\r\nSardar Sarovar Dam is one of the world\'s largest concrete gravity dam which is 1.2 kms long and 163 mts hight from its deepest foundation level. It has 30 radial gates weighing about 450 tonnes each.\r\n\r\n\r\nKhalwani Eco Tourism\r\nKhalwani Eco-Tourism is located near Sardar Sarovar Dam along the bank of a perennial stream fed by the waters released from the Godbole Gate. For accommodation tents and tree house are available. It has facilities like children play area, campfire zone, amphitheater, nursery, painting kits with herbal colours for children, nature education etc. River rafting is one of the popular sport and a recreational activity in India. Steering through the unbridled water and passing through treacherous rapids, is something that every adventurer seeks. River Rafting at Khalwani Eco-Tourism on the River Narmada provides an excellent opportunity to experience this utterly exhilarating water sport. Visitors will also enjoy activities like river crossing, Burma Bridge, river rafting, tubing, rock climbing & rappelling.\r\n\r\n\r\nEkta Cruise\r\nA unique way to see the Statue of Unity, world tallest statue, is through the river cruise. A passenger boat gives a breathtaking view of th'),
+(5, 'Kutch-Bhujj', 1, 3, 0, 5000, 'p1.jpeg', 'Kutch region of Gujarat is known world over for its extremely diverse flora and fauna, the culturally rich tribal natives and their unique arts and crafts. Life is celebrated here in its many forms, the colourful attire of the locals against the pristine white of the Rann of Kutch paints a flamboyant canvas. The region celebrates The Rann Utsav each year with much fanfare and gaiety attracting thousands of tourists each day of the Festival. Bhuj was the capital city of the princely state of Kutch, deriving its name from a hill called Bhujiyo Dungar which it is flanked by on one side while the other side is bracketed by The Hamirsar Lake. Bhuj boasts of the presence of many opulent palaces and thoughtfully curated art and craft museums. The tribal life in and around the Bhuj / Kutch region is diverse and unique with each tribe preserving and carrying on its traditional art generations after generations. The Banni Grasslands offer a distinctive experience of witnessing the vast open grasslands dotted by the Mud Huts or Bhungas of the Natives where hand embroidered masterpieces are turned out each day. Welcome to this mystical land that has so much to offer to the discerning traveller.'),
+(6, 'Jaisalmer', 1, 2, 1, 12000, 'p2.jpg', 'Jaisalmer has been enriched by its Jain community, which has adorned the city with beautiful temples, notably the temples dedicated to the 16th Tirthankara, Shantinath, and 23rd Tirthankara, Parshvanath.\r\n\r\nThere are seven Jain temples in total which are situated within the Jaisalmer fort built during the 12th and 15th centuries. Among these temples, the biggest is the Paraswanath Temple; the others are Chandraprabhu temple, Rishabdev temple, Shitalnath Temple, Kunthunath Temple, and Shantinath Temple. Known for their exquisite work of art and architecture that was predominant in the medieval era the temples are built out of yellow sandstone and have intricate engravings on them.\r\n\r\nJaisalmer has some of the oldest libraries of India which contain rarest of the manuscripts and artefacts of Jain tradition. There are many pilgrimage centres around Jaisalmer such as Lodhruva (Lodarva), Amarsagar, Brahmsar and Pokharan.'),
+(7, 'Dubai', 0, 7, 1, 50000, 'p3.jpeg', 'Dubai (/duËËˆbaÉª/ doo-BY; Arabic: Ø¯Ø¨ÙŠâ€Ž, romanized: Dubayy [dÊŠËˆbajj], Gulf Arabic pronunciation: [dÉ™Ëˆbaj]) is the most populous city in the United Arab Emirates (UAE) and the capital of the Emirate of Dubai.[5][6][7] Established in the 18th century as a small fishing village, the city grew rapidly in the early 21st century into a cosmopolitan metropolis with a focus on tourism and hospitality. Dubai is one of the world\'s most popular tourist destinations[8] with the second most five-star hotels in the world,[9] and the tallest building in the world, the Burj Khalifa.\r\n\r\nLocated in the eastern part of the Arabian Peninsula on the coast of the Persian Gulf, Dubai aims to be the business hub of Western Asia.[10] It is also a major global transport hub for passengers and cargo.[11] Oil revenue helped accelerate the development of the city, which was already a major mercantile hub. A centre for regional and international trade since the early 20th century, Dubai\'s economy relies on revenues from trade, tourism, aviation, real estate, and financial services.[12][13][14][15] Oil production contributed to less than 1 percent of the emirate\'s GDP in 2018.[16] According to government data, the population of Dubai is estimated at around 3,400,800 as of 8 September 2020.');
 
 --
 -- Indexes for dumped tables
@@ -170,6 +206,12 @@ INSERT INTO `package_master` (`package_id`, `package_name`, `package_available`,
 --
 ALTER TABLE `admin_master`
   ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `blog_master`
+--
+ALTER TABLE `blog_master`
+  ADD PRIMARY KEY (`blog_id`);
 
 --
 -- Indexes for table `contact_us`
@@ -219,6 +261,12 @@ ALTER TABLE `admin_master`
   MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `blog_master`
+--
+ALTER TABLE `blog_master`
+  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `contact_us`
 --
 ALTER TABLE `contact_us`
@@ -234,7 +282,7 @@ ALTER TABLE `hotel_master`
 -- AUTO_INCREMENT for table `img_master`
 --
 ALTER TABLE `img_master`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `inclusion_master`
@@ -252,7 +300,7 @@ ALTER TABLE `package_enquiry`
 -- AUTO_INCREMENT for table `package_master`
 --
 ALTER TABLE `package_master`
-  MODIFY `package_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `package_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
