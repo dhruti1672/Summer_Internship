@@ -73,7 +73,7 @@ $q= mysqli_query($connection, "select * from package_master order by package_id 
             ?>
           <div class="col-md-4">
             <div class="product-item">
-                <a href="package-details.php"><img src="admin/upload/<?php echo $row['package_img']; ?>" Style="width: 100%; max-height:150px; " alt=""></a>
+                <a href="package-details.php"><img src="admin/upload/<?php echo $row['package_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
               <div class="down-content">
                 <a href="package-details.php"><h4><?php echo $row['package_name']; ?></h4></a>
 
@@ -86,7 +86,8 @@ $q= mysqli_query($connection, "select * from package_master order by package_id 
                     if($row['package_available']==1)
                     {
                     ?>
-                    <strong title="Available"><i class="fa fa-calendar"></i> Available</strong> <?php } ?> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong title="Available"><i class="fa fa-calendar"></i> Available</strong> <?php } else {?> 
+                    <strong title="Available"><i class="fa fa-calendar"></i> Not Available</strong> <?php }?> &nbsp;&nbsp;&nbsp;&nbsp;
                     <strong title="Nights"><i class="fa fa-cube"></i> <?php echo $row['package_nights']; ?> Nights</strong> <br/>
                      <?php
                     if($row['flight_include']==1)

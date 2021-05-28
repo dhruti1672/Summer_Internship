@@ -1,3 +1,12 @@
+<?php
+session_start();
+require './class/atclass.php';
+
+$q= mysqli_query($connection, "select * from package_master order by package_id desc limit 3") or die("error in query". mysqli_error($connection));
+$q1= mysqli_query($connection, "select * from hotel_master order by hotel_id desc limit 3") or die("error in query". mysqli_error($connection));
+$q2= mysqli_query($connection, "select * from blog_master order by blog_id desc limit 3") or die("error in query". mysqli_error($connection));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,139 +78,90 @@
 
     <div class="latest-products">
       <div class="container">
-        <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Featured Vacations</h2>
-              <a href="packages.php">view more <i class="fa fa-angle-right"></i></a>
+              <h2>Top Packages</h2>
+              <a href="packages.php">view more<i class="fa fa-angle-right"></i></a>
             </div>
           </div>
+         <div class="row">
+            <?php
+               while ($row = mysqli_fetch_array($q)) {
+                   
+               
+            ?>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="package-details.php"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
+                <a href="package-details.php"><img src="admin/upload/<?php echo $row['package_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
               <div class="down-content">
-                <a href="package-details.php"><h4>Limelight Lodge</h4></a>
+                <a href="package-details.php"><h4><?php echo $row['package_name']; ?></h4></a>
 
-                <h6>$300 - $400</h6>
+                <h6>Rs. <?php echo $row['package_from']; ?></h6>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
+                <p><?php echo substr($row['package_desc'], 0, 100)?></p>
+                <a href=""><button type="button" class="btn btn-danger">View More</button></a> <br/><br/>
                 <small>
-                     <strong title="Available"><i class="fa fa-calendar"></i> Spring</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Nights"><i class="fa fa-cube"></i> 20 nights</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Flight included"><i class="fa fa-plane"></i> Flight included</strong>
+                    <?php
+                    if($row['package_available']==1)
+                    {
+                    ?>
+                    <strong title="Available"><i class="fa fa-calendar"></i> Available</strong> <?php } else{?> 
+                    <strong title="Available"><i class="fa fa-calendar"></i> Not Available</strong> <?php }?> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <strong title="Nights"><i class="fa fa-cube"></i> <?php echo $row['package_nights']; ?> Nights</strong> <br/>
+                     <?php
+                    if($row['flight_include']==1)
+                    {
+                    ?>
+                     <strong title="Flight included"><i class="fa fa-plane"></i> Flight included</strong> <?php } else {?>
+                    
+                    <strong title="Flight included"><i class="fa fa-plane"></i> Flight Not included</strong> <?php } ?>
                 </small>
               </div>
             </div>
           </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="package-details.php"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="package-details.php"><h4>Limelight Lodge</h4></a>
-
-                <h6>$300 - $400</h6>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
-                <small>
-                     <strong title="Available"><i class="fa fa-calendar"></i> Spring</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Nights"><i class="fa fa-cube"></i> 20 nights</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Flight included"><i class="fa fa-plane"></i> Flight included</strong>
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="package-details.php"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="package-details.php"><h4>Limelight Lodge</h4></a>
-
-                <h6>$300 - $400</h6>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
-                <small>
-                     <strong title="Available"><i class="fa fa-calendar"></i> Spring</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Nights"><i class="fa fa-cube"></i> 20 nights</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Flight included"><i class="fa fa-plane"></i> Flight included</strong>
-                </small>
-              </div>
-            </div>
-          </div>
-        </div>
+<?php
+               }
+?>
+         
+         </div>
       </div>
     </div>
 
-    <div class="latest-products">
+   <div class="latest-products">
       <div class="container">
-        <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
-              <h2>Top Flights</h2>
-              <a href="packages.php">view more <i class="fa fa-angle-right"></i></a>
+              <h2>Top Hotels</h2>
+              <a href="packages.php">view more<i class="fa fa-angle-right"></i></a>
             </div>
           </div>
+         <div class="row">
+            <?php
+               while ($row = mysqli_fetch_array($q1)) {
+                   
+               
+            ?>
           <div class="col-md-4">
             <div class="product-item">
-              <a href="package-details.php"><img src="assets/images/product-1-370x270.jpg" alt=""></a>
+                <a href="package-details.php"><img src="admin/upload/<?php echo $row['hotel_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
               <div class="down-content">
-                <a href="package-details.php"><h4>Limelight Lodge</h4></a>
+                <a href="package-details.php"><h4><?php echo $row['hotel_name']; ?></h4></a>
 
-                <h6>$300 - $400</h6>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
+                <h6>Rs. <?php echo $row['hotel_price']; ?></h6>
+                
+                <p><?php echo $row['hotel_address']; ?></p>
+                
                 <small>
-                     <strong title="Available"><i class="fa fa-calendar"></i> Spring</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Nights"><i class="fa fa-cube"></i> 20 nights</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Flight included"><i class="fa fa-plane"></i> Flight included</strong>
+                    <strong title="Nights"><i class="fa fa-cube"></i> <?php echo $row['hotel_night']; ?> Nights</strong> <br/>
                 </small>
               </div>
             </div>
           </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="package-details.php"><img src="assets/images/product-2-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="package-details.php"><h4>Limelight Lodge</h4></a>
-
-                <h6>$300 - $400</h6>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
-                <small>
-                     <strong title="Available"><i class="fa fa-calendar"></i> Spring</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Nights"><i class="fa fa-cube"></i> 20 nights</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Flight included"><i class="fa fa-plane"></i> Flight included</strong>
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="package-details.php"><img src="assets/images/product-3-370x270.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="package-details.php"><h4>Limelight Lodge</h4></a>
-
-                <h6>$300 - $400</h6>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum incidunt, aperiam nostrum et. Voluptas vel labore numqua.</p>
-
-                <small>
-                     <strong title="Available"><i class="fa fa-calendar"></i> Spring</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Nights"><i class="fa fa-cube"></i> 20 nights</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Flight included"><i class="fa fa-plane"></i> Flight included</strong>
-                </small>
-              </div>
-            </div>
-          </div>
-        </div>
+<?php
+               }
+?>
+         
+         </div>
       </div>
     </div>
 
@@ -215,40 +175,22 @@
               <a href="blog.php">read more <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
+<?php
+while ($row = mysqli_fetch_array($q2)) {
 
+
+?>
           <div class="col-lg-4 col-md-6">
             <div class="service-item">
-              <a href="#" class="services-item-image"><img src="assets/images/blog-1-370x270.jpg" class="img-fluid" alt=""></a>
+                <a href="<?php echo $row['blog_url'];?>" target="_blank" class="services-item-image"><img src="admin/upload/<?php echo $row['blog_img'];?>" style="width:100%; height: 200px;" class="img-fluid" alt=""></a>
 
               <div class="down-content">
-                <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit hic</a></h4>
-
-                <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
+                  <h4><a href="<?php echo $row['blog_url'];?>" target="_blank"><?php echo $row['blog_name'];?></a></h4>
+               
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item">
-              <a href="#" class="services-item-image"><img src="assets/images/blog-2-370x270.jpg" class="img-fluid" alt=""></a>
-
-              <div class="down-content">
-                <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h4>
-
-                <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="service-item">
-              <a href="#" class="services-item-image"><img src="assets/images/blog-3-370x270.jpg" class="img-fluid" alt=""></a>
-
-              <div class="down-content">
-                <h4><a href="#">Aperiam modi voluptatum fuga officiis cumque</a></h4>
-
-                <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
-              </div>
-            </div>
-          </div>
+<?php } ?>     
         </div>
       </div>
     </div>
