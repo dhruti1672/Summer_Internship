@@ -1,30 +1,31 @@
 <?php
- session_start();
- require '../class/atclass.php';
- 
- if(isset($_POST['submit']))
+
+session_start();
+include '../class/atclass.php';
+if(!isset($_SESSION['otp']))
 {
-    $email=mysqli_real_escape_string($connection,$_POST['mail']);
-    $pass=mysqli_real_escape_string($connection,$_POST['pass']);
-   
-    
-    $q= mysqli_query($connection,"select * from admin_master where admin_email='$email' and admin_pass='$pass'") or die("error");
-    $num= mysqli_num_rows($q);
-    $row= mysqli_fetch_array($q);
-    if($num>0)
+    header("location:forgot_pass");
+}
+if($_POST)
+{
+    $np= mysqli_real_escape_string($connection,$_POST['np']);
+    $cp= mysqli_real_escape_string($connection,$_POST['cp']);
+    if($np==$cp)
     {
-        $_SESSION['email']=$row['admin_email'];
-      
-        
-        header("location:index.php");
+         $update = mysqli_query($connection, "update admin_master set admin_pass='{$np}' where admin_email='{$_SESSION['pemail']}'") or die(mysqli_error($connection));
+                if ($update) 
+                {
+                    echo "<script>alert('password updated successfully');window.location='login.php'</script>";
+                }
     }
     else 
-    {
-        echo "<script>alert('Email or Password Is Invalid');</script>";
-    }
+        {
+            echo "<script>alert('New Password and Confirm Password did not match ..');</script>";
+        }
 }
 
 ?>
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,26 +57,25 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               
-                <h2>Hello! Please Sign-in</h2>
-              <h6 class="font-weight-light">Sign in to continue.</h6>
+                <h2>Enter New password</h2>
+             
               <form class="pt-3" method="post">
                 <div class="form-group">
-                  <input type="email" name="mail" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                    <input type="password" name="np" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="New Password">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="pass" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" name="cp" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="confirm Password">
                 </div>
                 
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
-                      <button type="submit" name="submit" class="btn btn-primary mr-2" >Sign-In</button>
+                      <button type="submit" name="submit" class="btn btn-primary mr-2" >Reset Password</button>
+                      <button type="submit" name="cancel" class="btn btn-primary mr-2" onclick="index.php">Cancel</button>
                   </div>
-                  <a href="forgot_pass.php" class="auth-link text-black">Forgot password?</a>
+                  
                 </div>
                 
-                <div class="text-center mt-4 font-weight-light">
-                  Don't have an account? <a href="register.php" class="text-primary">Create</a>
-                </div>
+                
               </form>
             </div>
           </div>

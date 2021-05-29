@@ -1,30 +1,25 @@
 <?php
- session_start();
- require '../class/atclass.php';
- 
- if(isset($_POST['submit']))
+session_start();
+include '../class/atclass.php';
+if(!isset($_SESSION['otp']))
 {
-    $email=mysqli_real_escape_string($connection,$_POST['mail']);
-    $pass=mysqli_real_escape_string($connection,$_POST['pass']);
-   
-    
-    $q= mysqli_query($connection,"select * from admin_master where admin_email='$email' and admin_pass='$pass'") or die("error");
-    $num= mysqli_num_rows($q);
-    $row= mysqli_fetch_array($q);
-    if($num>0)
+    header("location:forgot_pass");
+}
+if($_POST)
+{
+    $getotp= mysqli_real_escape_string($connection,$_POST['otp']);
+    echo $_SESSION['otp'];
+    if($_SESSION['otp']==$getotp)
     {
-        $_SESSION['email']=$row['admin_email'];
-      
-        
-        header("location:index.php");
+       header("location:new-password.php");
     }
-    else 
+ else
     {
-        echo "<script>alert('Email or Password Is Invalid');</script>";
+          echo "<script>alert('OTP not match ..');</script>";
     }
 }
 
-?>
+?>    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,26 +51,22 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               
-                <h2>Hello! Please Sign-in</h2>
-              <h6 class="font-weight-light">Sign in to continue.</h6>
+                <h2>Enter OTP</h2>
+             
               <form class="pt-3" method="post">
                 <div class="form-group">
-                  <input type="email" name="mail" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="text" required="" name="otp" minlength="6" maxlength="6" placeholder="Enter Otp" class="form-control form-control-lg" id="exampleInputEmail1">
                 </div>
-                <div class="form-group">
-                    <input type="password" name="pass" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                
+              
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
-                      <button type="submit" name="submit" class="btn btn-primary mr-2" >Sign-In</button>
+                      <button type="submit" name="submit" class="btn btn-primary mr-2" >Check Otp</button>
+                      
                   </div>
-                  <a href="forgot_pass.php" class="auth-link text-black">Forgot password?</a>
+                  
                 </div>
                 
-                <div class="text-center mt-4 font-weight-light">
-                  Don't have an account? <a href="register.php" class="text-primary">Create</a>
-                </div>
+               
               </form>
             </div>
           </div>
