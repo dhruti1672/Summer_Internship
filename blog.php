@@ -66,14 +66,14 @@ $q2= mysqli_query($connection, "select * from blog_master order by blog_id desc"
     <div class="products">
       <div class="container">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="row">
                 <?php
 while ($row = mysqli_fetch_array($q2)) {
 
 
 ?>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="service-item">
                     <a href="<?php echo $row['blog_url'];?>" target="_blank" class="services-item-image"><img src="admin/upload/<?php echo $row['blog_img'];?>" style=" width: 100%; max-height: 200px;"class="img-fluid" alt=""></a>
 

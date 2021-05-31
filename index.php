@@ -2,6 +2,21 @@
 session_start();
 require './class/atclass.php';
 
+if(isset($_POST['submit']))
+{
+    
+    $fname= mysqli_real_escape_string($connection,$_POST['fname']);
+    $mail= mysqli_real_escape_string($connection,$_POST['mail']);
+    $mess= mysqli_real_escape_string($connection,$_POST['mess']);
+    
+    $insertquery= mysqli_query($connection, "insert into contact_us(contact_name,contact_email,contact_mess) values('{$fname}','{$mail}','{$mess}')") or die("Error In Query".mysqli_error($connection));
+      if($insertquery)
+      {
+          echo "<script>alert('Message sent Successfully...')</script>";
+      }
+}
+
+
 $q= mysqli_query($connection, "select * from package_master order by package_id desc limit 3") or die("error in query". mysqli_error($connection));
 $q1= mysqli_query($connection, "select * from hotel_master order by hotel_id desc limit 3") or die("error in query". mysqli_error($connection));
 $q2= mysqli_query($connection, "select * from blog_master order by blog_id desc limit 3") or die("error in query". mysqli_error($connection));
@@ -92,14 +107,14 @@ $q2= mysqli_query($connection, "select * from blog_master order by blog_id desc 
             ?>
           <div class="col-md-4">
             <div class="product-item">
-                <a href="package-details.php"><img src="admin/upload/<?php echo $row['package_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
+                <a href="package-details.php?eid=<?php echo $row['package_id']; ?>"><img src="admin/upload/<?php echo $row['package_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
               <div class="down-content">
-                <a href="package-details.php"><h4><?php echo $row['package_name']; ?></h4></a>
+                <a href="package-details.php?eid=<?php echo $row['package_id']; ?>"><h4><?php echo $row['package_name']; ?></h4></a>
 
                 <h6>Rs. <?php echo $row['package_from']; ?></h6>
 
                 <p><?php echo substr($row['package_desc'], 0, 100)?></p>
-                <a href=""><button type="button" class="btn btn-danger">View More</button></a> <br/><br/>
+                <a href="package-details.php?eid=<?php echo $row['package_id']; ?>"><button type="button" class="btn btn-danger">View More</button></a> <br/><br/>
                 <small>
                     <?php
                     if($row['package_available']==1)
@@ -132,7 +147,7 @@ $q2= mysqli_query($connection, "select * from blog_master order by blog_id desc 
           <div class="col-md-12">
             <div class="section-heading">
               <h2>Top Hotels</h2>
-              <a href="packages.php">view more<i class="fa fa-angle-right"></i></a>
+              <a href="hotels.php">view more<i class="fa fa-angle-right"></i></a>
             </div>
           </div>
          <div class="row">
@@ -143,9 +158,9 @@ $q2= mysqli_query($connection, "select * from blog_master order by blog_id desc 
             ?>
           <div class="col-md-4">
             <div class="product-item">
-                <a href="package-details.php"><img src="admin/upload/<?php echo $row['hotel_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
+                <a href="hotel-details.php?eid=<?php echo $row['hotel_id']; ?>"><img src="admin/upload/<?php echo $row['hotel_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
               <div class="down-content">
-                <a href="package-details.php"><h4><?php echo $row['hotel_name']; ?></h4></a>
+                <a href="hotel-details.php?eid=<?php echo $row['hotel_id']; ?>"><h4><?php echo $row['hotel_name']; ?></h4></a>
 
                 <h6>Rs. <?php echo $row['hotel_price']; ?></h6>
                 
@@ -194,7 +209,51 @@ while ($row = mysqli_fetch_array($q2)) {
         </div>
       </div>
     </div>
+<div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Send us a Message</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact" action="" method="post">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <input type="text" class="form-control" id="name" name="fname" placeholder="Full Name" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        <input type="text" class="form-control" id="email" name="mail" placeholder="E-Mail Address" required="">
+                    </fieldset>
+                  </div>
+                  
+                  <div class="col-lg-12">
+                    <fieldset>
+                        <textarea  rows="6" class="form-control" id="message" name="mess" placeholder="Your Message" required=""></textarea>
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                        <button type="submit" id="form-submit" class="filled-button" name="submit">Send Message</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+<!--          <div class="col-md-4">
+            <img src="assets/images/team_01.jpg" class="img-fluid" alt="">
 
+            <h5 class="text-center" style="margin-top: 15px;">John Doe</h5>
+          </div>-->
+        </div>
+      </div>
+    </div>
   
 
     <?php

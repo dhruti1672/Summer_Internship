@@ -75,12 +75,12 @@ $q= mysqli_query($connection, "select * from package_master order by package_id 
             <div class="product-item">
                 <a href="package-details.php"><img src="admin/upload/<?php echo $row['package_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
               <div class="down-content">
-                <a href="package-details.php"><h4><?php echo $row['package_name']; ?></h4></a>
+                <a href="package-details.php?eid=<?php echo $row['package_id']; ?>"><h4><?php echo $row['package_name']; ?></h4></a>
 
                 <h6>Rs. <?php echo $row['package_from']; ?></h6>
 
                 <p><?php echo substr($row['package_desc'], 0, 100)?></p>
-                <a href=""><button type="button" class="btn btn-danger">View More</button></a> <br/><br/>
+                <a href="package-details.php?eid=<?php echo $row['package_id']; ?>"><button type="button" class="btn btn-danger">View More</button></a> <br/><br/>
                 <small>
                     <?php
                     if($row['package_available']==1)
@@ -122,71 +122,7 @@ $q= mysqli_query($connection, "select * from package_master order by package_id 
    include './themepart/footer.php';
    ?>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Book Now</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="contact-form">
-              <form action="#" id="contact">
-                  <div class="row">
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Pick-up location" required="">
-                          </fieldset>
-                       </div>
-
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Return location" required="">
-                          </fieldset>
-                       </div>
-                  </div>
-
-                  <div class="row">
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Pick-up date/time" required="">
-                          </fieldset>
-                       </div>
-
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Return date/time" required="">
-                          </fieldset>
-                       </div>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Enter full name" required="">
-
-                  <div class="row">
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Enter email address" required="">
-                          </fieldset>
-                       </div>
-
-                       <div class="col-md-6">
-                          <fieldset>
-                            <input type="text" class="form-control" placeholder="Enter phone" required="">
-                          </fieldset>
-                       </div>
-                  </div>
-              </form>
-           </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Book Now</button>
-          </div>
-        </div>
-      </div>
-    </div>
+   
 
 
     <!-- Bootstrap core JavaScript -->

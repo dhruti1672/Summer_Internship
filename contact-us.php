@@ -12,7 +12,7 @@ if(isset($_POST['submit']))
     $insertquery= mysqli_query($connection, "insert into contact_us(contact_name,contact_email,contact_mess) values('{$fname}','{$mail}','{$mess}')") or die("Error In Query".mysqli_error($connection));
       if($insertquery)
       {
-          echo "<script>alert('Record Inserted Successfully...')</script>";
+          echo "<script>alert('Message sent Successfully...')</script>";
       }
 }
 ?>
