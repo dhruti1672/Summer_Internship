@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2021 at 02:03 PM
+-- Generation Time: May 31, 2021 at 01:02 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.1.20
 
@@ -85,7 +85,12 @@ CREATE TABLE `contact_us` (
 
 INSERT INTO `contact_us` (`contact_id`, `contact_name`, `contact_email`, `contact_mess`) VALUES
 (2, 'Dhruti Mehta', 'dhrutidmehta123@gmail.com', 'hello, i need package of Goa tour. We are 2 adults and we need for 4 nights. Date will be in september.'),
-(3, 'Hetal ', 'hetalmehta12@gmail.com', 'i\'m travel agent and i need b2b rates for dubai\r\n');
+(3, 'Hetal ', 'hetalmehta12@gmail.com', 'i\'m travel agent and i need b2b rates for dubai\r\n'),
+(4, 'chirag vyas', 'chiragvyas@gmail.com', 'i need package of jaiselmer for 2 nights'),
+(5, 'Helly Shah', 'helly05@gmail.com', 'Hi. I\'m looking for Udaipur package for my family. can u please mail me all the available hotels with it\'s price and other necessary details on my mail.'),
+(6, 'Vihan Shukla', 'vihans@gmail.com', 'I want package of leela resort goa for 4 adults and for 3 nights. We are planning our trip in july.'),
+(7, 'Darshan Mehta', 'darshan4772@gmail.com', 'i am planning to celebrate my bday in udaipur and for that i need 2 nights package in any 5 star resort'),
+(8, 'Het ', 'het5@gmail.com', 'Hi im looking for foreign tour package. Please suggest me some.');
 
 -- --------------------------------------------------------
 
@@ -100,23 +105,24 @@ CREATE TABLE `hotel_master` (
   `hotel_address` text NOT NULL,
   `hotel_night` int(11) NOT NULL,
   `hotel_price` int(11) NOT NULL,
-  `hotel_img` varchar(150) NOT NULL
+  `hotel_img` varchar(150) NOT NULL,
+  `hotel_available` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `hotel_master`
 --
 
-INSERT INTO `hotel_master` (`hotel_id`, `package_id`, `hotel_name`, `hotel_address`, `hotel_night`, `hotel_price`, `hotel_img`) VALUES
-(1, 3, 'Prince Residency', 'Mehra Gaun, Bhimtal ,Bhowali Road, Bhimtal, District, Nainital , 263136', 2, 10000, '11.jpg'),
-(2, 4, ' Statue Of Unity Eco Camp', 'sou eco camp, Akteshwar opp Indian oil petrol pump, Garudeshwar, Narmada, Gujarat 393151, India., 393151 Akteshwar, India', 1, 3000, 'h1.jpg'),
-(3, 4, 'Tent City Narmada', 'Tent City Narmada, Dyke -3, Sardar Sarovar Dam Site, Kevadiya, 393151 Kevadia, India ', 2, 7000, 'h2.jpg'),
-(4, 5, 'The Fern Residency, Bhuj', 'Bhuj Madhapar Highway Plot No. 14 A , 14 B 15, Bhuj 370020 India', 4, 3597, 'h3.jpg'),
-(5, 5, 'Regenta Resort Bhuj', 'Gmdc House Opp Hill Garden GMDC House, Bhuj 370001 India', 3, 2836, 'h4.jpg'),
-(6, 3, 'Seven Sky Clarks Exotica', 'Seven Sky Clarks Exotica, Airport Ring Road, Bhuj 370001 India', 2, 2500, 'h5.jpg'),
-(7, 6, 'Chokhi Dhani - The Palace Hotel', ' Plot No.415, Barmer Road, Indira Colony, Jaisalmer, India, 345001', 2, 3275, 'h6.jpg'),
-(8, 6, 'Boutique Helsinki ', 'Boutique Helsinki,Bera Road, Postal Colony, Jaisalmer, India, 345001', 3, 4500, 'h7.jpg'),
-(9, 6, 'WelcomHeritage Mohangarh Fort', 'Jaisalmer Road, Shri Mohangarh - 345003, District - Jaisalmer, Rajasthan, INDIA, 345003 Jaisalmer, India', 1, 6720, 'h8.jpg');
+INSERT INTO `hotel_master` (`hotel_id`, `package_id`, `hotel_name`, `hotel_address`, `hotel_night`, `hotel_price`, `hotel_img`, `hotel_available`) VALUES
+(1, 3, 'Prince Residency', 'Mehra Gaun, Bhimtal ,Bhowali Road, Bhimtal, District, Nainital , 263136', 2, 10000, '11.jpg', 1),
+(2, 4, ' Statue Of Unity Eco Camp', 'sou eco camp, Akteshwar opp Indian oil petrol pump, Garudeshwar, Narmada, Gujarat 393151, India., 393151 Akteshwar, India', 1, 3000, 'h1.jpg', 0),
+(3, 4, 'Tent City Narmada', 'Tent City Narmada, Dyke -3, Sardar Sarovar Dam Site, Kevadiya, 393151 Kevadia, India ', 2, 7000, 'h2.jpg', 1),
+(4, 5, 'The Fern Residency, Bhuj', 'Bhuj Madhapar Highway Plot No. 14 A , 14 B 15, Bhuj 370020 India', 4, 3597, 'h3.jpg', 1),
+(5, 5, 'Regenta Resort Bhuj', 'Gmdc House Opp Hill Garden GMDC House, Bhuj 370001 India', 3, 2836, 'h4.jpg', 1),
+(6, 5, 'Seven Sky Clarks Exotica', 'Seven Sky Clarks Exotica, Airport Ring Road, Bhuj 370001 India', 2, 2500, 'h5.jpg', 0),
+(7, 6, 'Chokhi Dhani - The Palace Hotel', ' Plot No.415, Barmer Road, Indira Colony, Jaisalmer, India, 345001', 2, 3275, 'h6.jpg', 1),
+(8, 6, 'Boutique Helsinki ', 'Boutique Helsinki,Bera Road, Postal Colony, Jaisalmer, India, 345001', 3, 4500, 'h7.jpg', 1),
+(9, 6, 'WelcomHeritage Mohangarh Fort', 'Jaisalmer Road, Shri Mohangarh - 345003, District - Jaisalmer, Rajasthan, INDIA, 345003 Jaisalmer, India', 1, 6720, 'h8.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -135,7 +141,15 @@ CREATE TABLE `img_master` (
 --
 
 INSERT INTO `img_master` (`img_id`, `hotel_id`, `img_url`) VALUES
-(2, 1, '2.jpg');
+(2, 1, '2.jpg'),
+(3, 2, 'sou-1.jpg'),
+(4, 2, 'sou-3.jpg'),
+(5, 2, 'sou-2.jpg'),
+(6, 9, 'h9-5.jpg'),
+(7, 9, 'h9-4.jpg'),
+(8, 9, 'h9-3.jpg'),
+(9, 9, 'h9-2.jpg'),
+(10, 9, 'h9-1.jpg');
 
 -- --------------------------------------------------------
 
@@ -153,6 +167,23 @@ CREATE TABLE `inclusion_master` (
   `inclusion_flight` int(1) NOT NULL,
   `hotel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `package report`
+-- (See below for the actual view)
+--
+CREATE TABLE `package report` (
+`package_name` varchar(70)
+,`package_available` tinyint(1)
+,`package_nights` int(10)
+,`flight_include` tinyint(1)
+,`package_desc` text
+,`hotel_id` int(11)
+,`hotel_name` varchar(50)
+,`hotel_price` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -181,6 +212,15 @@ INSERT INTO `package_master` (`package_id`, `package_name`, `package_available`,
 (5, 'Kutch-Bhujj', 1, 3, 0, 5000, 'p1.jpeg', 'Kutch region of Gujarat is known world over for its extremely diverse flora and fauna, the culturally rich tribal natives and their unique arts and crafts. Life is celebrated here in its many forms, the colourful attire of the locals against the pristine white of the Rann of Kutch paints a flamboyant canvas. The region celebrates The Rann Utsav each year with much fanfare and gaiety attracting thousands of tourists each day of the Festival. Bhuj was the capital city of the princely state of Kutch, deriving its name from a hill called Bhujiyo Dungar which it is flanked by on one side while the other side is bracketed by The Hamirsar Lake. Bhuj boasts of the presence of many opulent palaces and thoughtfully curated art and craft museums. The tribal life in and around the Bhuj / Kutch region is diverse and unique with each tribe preserving and carrying on its traditional art generations after generations. The Banni Grasslands offer a distinctive experience of witnessing the vast open grasslands dotted by the Mud Huts or Bhungas of the Natives where hand embroidered masterpieces are turned out each day. Welcome to this mystical land that has so much to offer to the discerning traveller.'),
 (6, 'Jaisalmer', 1, 2, 1, 12000, 'p2.jpg', 'Jaisalmer has been enriched by its Jain community, which has adorned the city with beautiful temples, notably the temples dedicated to the 16th Tirthankara, Shantinath, and 23rd Tirthankara, Parshvanath.\r\n\r\nThere are seven Jain temples in total which are situated within the Jaisalmer fort built during the 12th and 15th centuries. Among these temples, the biggest is the Paraswanath Temple; the others are Chandraprabhu temple, Rishabdev temple, Shitalnath Temple, Kunthunath Temple, and Shantinath Temple. Known for their exquisite work of art and architecture that was predominant in the medieval era the temples are built out of yellow sandstone and have intricate engravings on them.\r\n\r\nJaisalmer has some of the oldest libraries of India which contain rarest of the manuscripts and artefacts of Jain tradition. There are many pilgrimage centres around Jaisalmer such as Lodhruva (Lodarva), Amarsagar, Brahmsar and Pokharan.'),
 (7, 'Dubai', 0, 7, 1, 50000, 'p3.jpeg', 'Dubai (/duËËˆbaÉª/ doo-BY; Arabic: Ø¯Ø¨ÙŠâ€Ž, romanized: Dubayy [dÊŠËˆbajj], Gulf Arabic pronunciation: [dÉ™Ëˆbaj]) is the most populous city in the United Arab Emirates (UAE) and the capital of the Emirate of Dubai.[5][6][7] Established in the 18th century as a small fishing village, the city grew rapidly in the early 21st century into a cosmopolitan metropolis with a focus on tourism and hospitality. Dubai is one of the world\'s most popular tourist destinations[8] with the second most five-star hotels in the world,[9] and the tallest building in the world, the Burj Khalifa.\r\n\r\nLocated in the eastern part of the Arabian Peninsula on the coast of the Persian Gulf, Dubai aims to be the business hub of Western Asia.[10] It is also a major global transport hub for passengers and cargo.[11] Oil revenue helped accelerate the development of the city, which was already a major mercantile hub. A centre for regional and international trade since the early 20th century, Dubai\'s economy relies on revenues from trade, tourism, aviation, real estate, and financial services.[12][13][14][15] Oil production contributed to less than 1 percent of the emirate\'s GDP in 2018.[16] According to government data, the population of Dubai is estimated at around 3,400,800 as of 8 September 2020.');
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `package report`
+--
+DROP TABLE IF EXISTS `package report`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `package report`  AS  select `package_master`.`package_name` AS `package_name`,`package_master`.`package_available` AS `package_available`,`package_master`.`package_nights` AS `package_nights`,`package_master`.`flight_include` AS `flight_include`,`package_master`.`package_desc` AS `package_desc`,`hotel_master`.`hotel_id` AS `hotel_id`,`hotel_master`.`hotel_name` AS `hotel_name`,`hotel_master`.`hotel_price` AS `hotel_price` from (`hotel_master` join `package_master` on((`hotel_master`.`package_id` = `package_master`.`package_id`))) ;
 
 --
 -- Indexes for dumped tables
@@ -249,19 +289,19 @@ ALTER TABLE `blog_master`
 -- AUTO_INCREMENT for table `contact_us`
 --
 ALTER TABLE `contact_us`
-  MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `contact_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `hotel_master`
 --
 ALTER TABLE `hotel_master`
-  MODIFY `hotel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `hotel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `img_master`
 --
 ALTER TABLE `img_master`
-  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `inclusion_master`
