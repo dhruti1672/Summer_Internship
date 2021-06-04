@@ -1,9 +1,9 @@
 <?php
     session_start();
     require './class/atclass.php';
-    $eid=$_GET["eid"];
+    $hid=$_GET["hid"];
     
-    if(!isset($_GET['eid']))
+    if(!isset($_GET['hid']))
     {
         header("location:hotels.php");
     }
@@ -23,9 +23,9 @@
     
     
     
-    $q1=mysqli_query($connection, "select * from hotel_master where hotel_id='{$eid}'") or die("Error". mysqli_error($connection));
+    $q1=mysqli_query($connection, "select * from hotel_master where hotel_id='{$hid}'") or die("Error". mysqli_error($connection));
     
-    $q2=mysqli_query($connection, "select * from img_master where hotel_id='{$eid}'") or die("Error". mysqli_error($connection));
+    $q2=mysqli_query($connection, "select * from img_master where hotel_id='{$hid}'") or die("Error". mysqli_error($connection));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +97,7 @@
                     $row= mysqli_fetch_array($q1);
                   ?>
                 <img src="admin/upload/<?php echo $row['hotel_img']?>" alt="" class="img-fluid wc-image" style="width: 200%; height: 400px;">
-               
+
             </div>
             <br>
       
@@ -122,7 +122,10 @@
               </p>
 
               <br/><br/>
-              <h6><i class="fa fa-map-marker"></i> <?php echo $row['hotel_address']; ?></h6>
+              <h6><i class="fa fa-map-marker"></i> <?php echo $row['hotel_address']; ?></a></h6>
+              <br/><br/>
+              <a href="<?php echo $row['hotel_add_url'] ?>" target="_blank"><button type="button" class="btn btn-danger" style="text-align:center">Show On Map</button></a> 
+              <a href="hotel-booking.php?hid=<?php echo $row['hotel_id']; ?>"><button type="button" class="btn btn-danger" style="text-align:center">Book Now</button></a> <br/><br/>
                </div>
         </div>
       </div>
@@ -137,8 +140,10 @@
                <h4>Hotel Images</h4><br/>
            
             <div class="row">
+                
                    <?php
                           while ($row1 = mysqli_fetch_array($q2)) {
+                              
                     ?>
               <div class="col-md-4">
                 <div class="service-item">

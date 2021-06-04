@@ -75,12 +75,12 @@ $q= mysqli_query($connection, "select * from hotel_master order by hotel_id desc
             <div class="product-item">
                 <a href="hotel-details.php"><img src="admin/upload/<?php echo $row['hotel_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
               <div class="down-content">
-                <a href="hotel-details.php?eid=<?php echo $row['hotel_id']; ?>"><h4><?php echo $row['hotel_name']; ?></h4></a>
+                <a href="hotel-details.php?hid=<?php echo $row['hotel_id']; ?>"><h4><?php echo $row['hotel_name']; ?></h4></a>
 
                 <h6>Rs. <?php echo $row['hotel_price']; ?></h6>
 
                 <p><?php echo substr($row['hotel_address'], 0, 100)?></p>
-                <a href="hotel-details.php?eid=<?php echo $row['hotel_id']; ?>"><button type="button" class="btn btn-danger">View More</button></a> <br/><br/>
+                <a href="hotel-details.php?hid=<?php echo $row['hotel_id']; ?>"><button type="button" class="btn btn-danger">View More</button></a> <br/><br/>
                 <small>
                     <?php
                     if($row['hotel_available']==1)

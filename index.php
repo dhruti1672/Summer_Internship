@@ -158,9 +158,9 @@ $q2= mysqli_query($connection, "select * from blog_master order by blog_id desc 
             ?>
           <div class="col-md-4">
             <div class="product-item">
-                <a href="hotel-details.php?eid=<?php echo $row['hotel_id']; ?>"><img src="admin/upload/<?php echo $row['hotel_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
+                <a href="hotel-details.php?hid=<?php echo $row['hotel_id']; ?>"><img src="admin/upload/<?php echo $row['hotel_img']; ?>" Style="width: 100%; max-height:200px; " alt=""></a>
               <div class="down-content">
-                <a href="hotel-details.php?eid=<?php echo $row['hotel_id']; ?>"><h4><?php echo $row['hotel_name']; ?></h4></a>
+                <a href="hotel-details.php?hid=<?php echo $row['hotel_id']; ?>"><h4><?php echo $row['hotel_name']; ?></h4></a>
 
                 <h6>Rs. <?php echo $row['hotel_price']; ?></h6>
                 

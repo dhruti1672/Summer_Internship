@@ -168,6 +168,7 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
                <thead>
                     <tr>
+                         <th>Image</th>
                          <th>Name</th>
                          <th>Address</th>
                          <th>Nights</th>
@@ -183,7 +184,8 @@
                   ?>
                       
                     <tr>
-                         <td><?php echo $row1['hotel_name']; ?></td>
+                        <td><a href="hotel-details.php?hid=<?php echo $row1['hotel_id']; ?>"><img src="admin/upload/<?php echo $row1['hotel_img']?>" alt="" class="img-fluid wc-image" style="width: 300px; height: 150px;"></a></td>
+                        <td><a href="hotel-details.php?hid=<?php echo $row1['hotel_id']; ?>"><?php echo $row1['hotel_name']; ?></a></td>
                          <td><?php echo $row1['hotel_address']; ?></td>
                          <td><?php echo $row1['hotel_night']; ?> Nights</td>
                          <td>INR <?php echo $row1['hotel_price'];  ?></td>
