@@ -8,6 +8,8 @@ if(!isset($_GET['hid']))
 else
 {
     $hid=$_GET["hid"];
+    $_SESSION['hid']=$hid;
+   
 }
 if(isset($_POST['submit']))
 {
@@ -25,10 +27,19 @@ if(isset($_POST['submit']))
     $adult=$_POST['adult'];
     
     $iq=mysqli_query($connection,"INSERT INTO `booking_details`(`book_for_work`, `book_title`, `book_fname`, `book_lname`, `departure_date`, `arrival_date`, `book_cc`, `book_num`, `book_mail`, `book_infant`, `book_child`, `book_adult`, `hotel_id`) VALUES ('{$work}','{$title}','{$fname}','{$lname}','{$dept}','{$arri}','{$cc}','{$phn}','{$email}','{$infant}','{$child}','{$adult}','{$hid}')") or die("eror".mysqli_error($connection));
-
+    
+    
     if($iq)
     {
-        echo "<script>alert('inserted')</script>";
+        $lastid= mysqli_insert_id($connection);
+        $sq= mysqli_query($connection, "select * from hotel_master where hotel_id='{$_SESSION['hid']}'") or die("error". mysqli_error($connection));
+        $row= mysqli_fetch_array($sq);
+        $cprice=($row['hotel_price']/2)*$child;
+        $adultprice=$row['hotel_price']*$adult;
+        $totalp=$cprice+$adultprice;
+        $_SESSION['totatp']=$totalp;
+        $_SESSION['book_id']=$lastid;
+        header("location:booking-payment.php");
     }
 
 }

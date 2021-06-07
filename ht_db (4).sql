@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2021 at 01:29 PM
+-- Generation Time: Jun 07, 2021 at 11:53 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 7.4.19
 
@@ -93,8 +93,8 @@ CREATE TABLE `booking_details` (
 --
 
 INSERT INTO `booking_details` (`book_id`, `book_for_work`, `book_title`, `book_fname`, `book_lname`, `departure_date`, `arrival_date`, `book_cc`, `book_num`, `book_mail`, `book_infant`, `book_child`, `book_adult`, `hotel_id`) VALUES
-(1, 1, '2', 'hetal', 'mehta', '2021-06-24', '2021-07-11', 91, 9033786674, 'hetalmehta12@gmail.com', 1, 0, 2, 2),
-(2, 0, '3', 'dhruti', 'mehta', '2021-07-11', '2021-07-14', 91, 9033835455, 'dhrutimehta1672@gmail.com', 1, 1, 2, 2);
+(1, 1, '3', 'Dhruti', 'Mehta', '2021-06-09', '2021-06-12', 91, 9033835453, 'dhrutimehta1672@gmail.com', 0, 1, 1, 9),
+(2, 0, '1', 'Meet', 'Patel', '2021-06-17', '2021-06-20', 91, 9898429544, 'meetpatel@gmail.com', 0, 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -226,6 +226,28 @@ INSERT INTO `package_master` (`package_id`, `package_name`, `package_available`,
 (6, 'Jaisalmer', 1, 2, 1, 12000, 'p2.jpg', 'Jaisalmer has been enriched by its Jain community, which has adorned the city with beautiful temples, notably the temples dedicated to the 16th Tirthankara, Shantinath, and 23rd Tirthankara, Parshvanath.\r\n\r\nThere are seven Jain temples in total which are situated within the Jaisalmer fort built during the 12th and 15th centuries. Among these temples, the biggest is the Paraswanath Temple; the others are Chandraprabhu temple, Rishabdev temple, Shitalnath Temple, Kunthunath Temple, and Shantinath Temple. Known for their exquisite work of art and architecture that was predominant in the medieval era the temples are built out of yellow sandstone and have intricate engravings on them.\r\n\r\nJaisalmer has some of the oldest libraries of India which contain rarest of the manuscripts and artefacts of Jain tradition. There are many pilgrimage centres around Jaisalmer such as Lodhruva (Lodarva), Amarsagar, Brahmsar and Pokharan.'),
 (7, 'Dubai', 0, 7, 1, 50000, 'p3.jpeg', 'Dubai (/duËËˆbaÉª/ doo-BY; Arabic: Ø¯Ø¨ÙŠâ€Ž, romanized: Dubayy [dÊŠËˆbajj], Gulf Arabic pronunciation: [dÉ™Ëˆbaj]) is the most populous city in the United Arab Emirates (UAE) and the capital of the Emirate of Dubai.[5][6][7] Established in the 18th century as a small fishing village, the city grew rapidly in the early 21st century into a cosmopolitan metropolis with a focus on tourism and hospitality. Dubai is one of the world\'s most popular tourist destinations[8] with the second most five-star hotels in the world,[9] and the tallest building in the world, the Burj Khalifa.\r\n\r\nLocated in the eastern part of the Arabian Peninsula on the coast of the Persian Gulf, Dubai aims to be the business hub of Western Asia.[10] It is also a major global transport hub for passengers and cargo.[11] Oil revenue helped accelerate the development of the city, which was already a major mercantile hub. A centre for regional and international trade since the early 20th century, Dubai\'s economy relies on revenues from trade, tourism, aviation, real estate, and financial services.[12][13][14][15] Oil production contributed to less than 1 percent of the emirate\'s GDP in 2018.[16] According to government data, the population of Dubai is estimated at around 3,400,800 as of 8 September 2020.');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_ master`
+--
+
+CREATE TABLE `payment_ master` (
+  `pay_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `pay_status` text NOT NULL,
+  `pay_request_id` text NOT NULL,
+  `payment_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment_ master`
+--
+
+INSERT INTO `payment_ master` (`pay_id`, `book_id`, `pay_status`, `pay_request_id`, `payment_id`) VALUES
+(1, 1, 'Credit', '154e81628f7e43ff879316cb0cd2ba7b', 'MOJO1607F05N02186622'),
+(2, 2, 'Credit', 'ebdf0623031f4c02872e7d620a21030d', 'MOJO1607M05N02186625');
+
 --
 -- Indexes for dumped tables
 --
@@ -280,6 +302,12 @@ ALTER TABLE `package_master`
   ADD UNIQUE KEY `package_name` (`package_name`);
 
 --
+-- Indexes for table `payment_ master`
+--
+ALTER TABLE `payment_ master`
+  ADD PRIMARY KEY (`pay_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -330,6 +358,12 @@ ALTER TABLE `inclusion_master`
 --
 ALTER TABLE `package_master`
   MODIFY `package_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `payment_ master`
+--
+ALTER TABLE `payment_ master`
+  MODIFY `pay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
