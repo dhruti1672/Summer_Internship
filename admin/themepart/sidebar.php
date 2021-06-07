@@ -15,8 +15,8 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="add_package.php">Add Package</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Edit Package</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">View Package</a></li>
+                  
+                  <li class="nav-item"> <a class="nav-link" href="view_package.php">View Package</a></li>
               </ul>
             </div>
           </li>
@@ -29,8 +29,8 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="add_hotel.php">Add Hotels</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">Edit Hotels</a></li>
-                <li class="nav-item"> <a class="nav-link" href="">View Hotels</a></li>
+                  
+                  <li class="nav-item"> <a class="nav-link" href="view_hotel.php">View Hotels</a></li>
               </ul>
             </div>
           </li>
@@ -42,10 +42,48 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">Add Images</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="add_image.php">Add Images</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="view_image.php">View Images</a></li>
               </ul>
             </div>
           </li>
-          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Bookings</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="view_bookings.php">View Booking</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Payments</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="view_payment.php">View Payments</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Blogs</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="add_blog.php">Add Blogs</a></li>
+                  
+                  <li class="nav-item"> <a class="nav-link" href="view_blog.php">View Blogs</a></li>
+              </ul>
+            </div>
+          </li>
         </ul>
       </nav>
