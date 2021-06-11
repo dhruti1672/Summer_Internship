@@ -56,7 +56,7 @@ $q= mysqli_query($connection,"SELECT * FROM `payment_ master` order by pay_id de
               <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                    <h3 class="font-weight-bold" style="text-align: center">Hotel Display</h3>
+                    <h3 class="font-weight-bold" style="text-align: center">Payment Display</h3>
                  <br/>
                   
                   <div class="table-responsive">
