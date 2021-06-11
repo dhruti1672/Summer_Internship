@@ -104,7 +104,7 @@ if(isset($_POST['submit']))
                     
                     <div class="form-group">
                       <label for="exampleSelectGender">Select Hotel</label>
-                      <select class="form-control" name="hname" id="exampleSelectGender">
+                      <select class="form-control" name="hname" id="exampleSelectGender" required="">
                           <?php while ($row = mysqli_fetch_array($q)) {
                                 
                             ?>

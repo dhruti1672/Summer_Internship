@@ -33,7 +33,7 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
         }
 }
  else {
-    echo "<script>alert('only jpeg and png image is allowed');window.location='add_package.php';</script>";
+    echo "<script>alert('only jpeg and png image is allowed');window.location='add_blog.php';</script>";
 }
 }
  
@@ -95,15 +95,15 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
                   <form class="forms-sample" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="exampleInputName1">Hotel Name</label>
-                      <input type="text" name="name" class="form-control" id="exampleInputName1" placeholder="Name">
+                      <input type="text" name="name" class="form-control" id="exampleInputName1" placeholder="Name" required="">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputName2">Hotel Package Nights</label>
-                      <input type="text" name="nights" class="form-control" id="exampleInputName1" placeholder="Total Nights">
+                      <input type="text" name="nights" class="form-control" id="exampleInputName1" placeholder="Total Nights" required="">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputName3">Hotel Price</label>
-                      <input type="text" name="price" class="form-control" id="exampleInputName1" placeholder="Starting range">
+                      <input type="text" name="price" class="form-control" id="exampleInputName1" placeholder="Starting range" required="">
                     </div>
                       <div class="form-group">
                       <label>upload Image</label>
@@ -117,7 +117,7 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
                     </div>
                     <div class="form-group">
                       <label for="exampleSelectGender">Package Place</label>
-                      <select class="form-control" name="package_id" id="exampleSelectGender">
+                      <select class="form-control" name="package_id" id="exampleSelectGender" required="">
                           <?php
                                     $sc= mysqli_query($connection,"select * from package_master") or die("error");
                                     while($row=mysqli_fetch_array($sc))
@@ -131,7 +131,7 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
                     
                     <div class="form-group">
                       <label for="exampleTextarea1">Hotel Address</label>
-                      <textarea class="form-control" name="desc" id="exampleTextarea1" rows="2"></textarea>
+                      <textarea class="form-control" name="desc" id="exampleTextarea1" rows="2" required=""></textarea>
                     </div>
                       <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                     <button type="reset" class="btn btn-light">Cancel</button>

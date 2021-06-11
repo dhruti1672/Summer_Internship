@@ -1,39 +1,38 @@
 <?php
  session_start();
  require '../class/atclass.php';
- 
- if(isset($_POST['submit']))
+ if(!isset($_SESSION['email']))
+{
+    header("location:login.php");
+}
+//   will not display warning message on browser
+error_reporting(0);       
+
+if(isset($_POST['submit']))
  {
      $name= mysqli_real_escape_string($connection,$_POST['name']);
-     $avail= mysqli_real_escape_string($connection,$_POST['avail']);
-     $nights= mysqli_real_escape_string($connection,$_POST['nights']);
-     $flight= mysqli_real_escape_string($connection,$_POST['flight']);
-     $price= mysqli_real_escape_string($connection,$_POST['price']);
-     $desc= mysqli_real_escape_string($connection,$_POST['desc']);
-     $f=$_FILES['img'];
+     $url= mysqli_real_escape_string($connection,$_POST['url']);
+      $f=$_FILES['img'];
      $file = $_FILES['img']['name'];
-        
-if($f['type']=="image/jpeg" || $f['type']=="image/png")
-{
-        move_uploaded_file($_FILES['img']['tmp_name'], "upload/" . $file);
+       if($f['type']=="image/jpeg" || $f['type']=="image/png")
+       {
+               move_uploaded_file($_FILES['img']['tmp_name'], "upload/" . $file);  
 
-    $insertquery = mysqli_query($connection, "INSERT INTO `package_master`( `package_name`, `package_available`, `package_nights`, `flight_include`, `package_from`, `package_img`, `package_desc`) 
-        VALUES('{$name}','{$avail}','{$nights}','{$flight}','{$price}','{$file}','{$desc}')") or die("Error In Query" . mysqli_error($connection));
+           $insertquery = mysqli_query($connection, "INSERT INTO `blog_master`(`blog_name`, `blog_url`, `blog_img`) VALUES('{$name}','{$url}','{$file}')") or die("Error In Query" . mysqli_error($connection));
 
-        if ($insertquery) {
+               if ($insertquery) {
 
 
-      echo "<script>alert('Package Added Successfully.');window.location='add_package.php';</script>";
-     
-       
-        }  
+             echo "<script>alert('Blog Added Successfully.');window.location='add_blog.php';</script>";
+
+
+               }
+       }
+        else {
+           echo "<script>alert('only jpeg and png image is allowed');window.location='add_blog.php';</script>";
+       }
 }
- else {
-    echo "<script>alert('only jpeg and png image is allowed');window.location='add_package.php';</script>";
-}
-   
- }
- 
+  
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,50 +83,29 @@ if($f['type']=="image/jpeg" || $f['type']=="image/png")
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title">Add Package Information</h3>
-                  <p class="card-description">
-                    Package Information
-                  </p>
+                  <h3 class="card-title">Add blog</h3>
+                  <br/>
                   <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    
                     <div class="form-group">
-                      <label for="exampleInputName1">Package Name</label>
+                      <label for="exampleInputName1">Blog Name</label>
                       <input type="text" name="name" class="form-control" id="exampleInputName1" placeholder="Name" required="">
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputName2">Package Nights</label>
-                      <input type="text" name="nights" class="form-control" id="exampleInputName1" placeholder="Total Nights" required="">
+                      <div class="form-group">
+                      <label for="exampleInputName1">Blog URL</label>
+                      <input type="text" name="url" class="form-control" id="exampleInputName1" placeholder="URL" required="">
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputName3">Package Starting Range</label>
-                      <input type="text" name="price" class="form-control" id="exampleInputName1" placeholder="Starting range" required="">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleSelectGender">Availability</label>
-                      <select class="form-control" name="avail" id="exampleSelectGender" required="">
-                          <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                      </div>
                     <div class="form-group">
                       <label>upload Image</label>
                       <input type="file" name="img" class="file-upload-default">
                       <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                          <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                         <span class="input-group-append">
                           <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                         </span>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="exampleSelectFlight">Flights Included</label>
-                      <select class="form-control" name="flight" id="exampleSelectGender" required="">
-                          <option value="1" >Yes</option>
-                            <option value="0">No</option>
-                        </select></div>
-                    <div class="form-group">
-                      <label for="exampleTextarea1">Description</label>
-                      <textarea class="form-control" name="desc" id="exampleTextarea1" rows="4" required=""></textarea>
-                    </div>
+                    
                       <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                     <button type="reset" class="btn btn-light">Cancel</button>
                   </form>
