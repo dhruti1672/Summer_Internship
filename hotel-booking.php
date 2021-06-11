@@ -112,35 +112,35 @@ if(isset($_POST['submit']))
         
         <h5>Are You Travelling For Work?</h5>
         <!--First Row-->
-        <div class="row mb-3 mt-3" style="text-align:center"> <label class="radiobtn"><input type="radio" name="gender" value="1"> Yes</label> 
+        <div class="row mb-3 mt-3" style="text-align:center"> <label class="radiobtn" required=""><input type="radio" name="gender" value="1" > Yes</label> 
         <label class="radiobtn"><input type="radio" name="gender" value="0"> No</label> </div>
         <!--Second Row-->
         <div class="row">
-            <div class="col-sm-3"> <select class="browser-default custom-select mb-4" name="title" id="select">
+            <div class="col-sm-3"> <select class="browser-default custom-select mb-4" name="title" id="select" required="">
                     <option value="" disabled="" selected="">Select Title</option>
                     <option value="1">Mr.</option>
                     <option value="2">Mrs.</option>
                     <option value="3">Miss.</option>
                 </select> </div>
                 
-            <div class="col-sm-4"> <input placeholder=" First Name" type="text" id="name" name="name" class="form-control mb-4" style="font-family:Arial, FontAwesome">  </div>
-            <div class="col-sm-4"> <input placeholder=" Last Name" type="text" id="lname" name="lname" class="form-control mb-4" style="font-family:Arial, FontAwesome">  </div>
+            <div class="col-sm-4"> <input placeholder=" First Name" type="text" id="name" name="name" class="form-control mb-4" style="font-family:Arial, FontAwesome" required="">  </div>
+            <div class="col-sm-4"> <input placeholder=" Last Name" type="text" id="lname" name="lname" class="form-control mb-4" style="font-family:Arial, FontAwesome" required="">  </div>
         </div><br/>
         <!--Third Row-->
         <div class="row" >
-            <div class="col-sm-6"><p style="font-weight:bold;">Departure Date</p> </div>
+            <div class="col-sm-6"><p style="font-weight:bold;" >Departure Date</p> </div>
             <div class="col-sm-6"><p style="font-weight:bold">Arrival Date</p> </div>
         </div><br/>
         <div class="row">
-            <div class="col-sm-4"> <input placeholder="Departing" type="date" name="dept" id="date-picker-example" class="form-control datepicker mb-4" style="font-family:Arial, FontAwesome" min="<?php echo(date('Y/m/d')) ?>"> </div>
+            <div class="col-sm-4"> <input placeholder="Departing" type="date" name="dept" id="date-picker-example" class="form-control datepicker mb-4" style="font-family:Arial, FontAwesome" min="<?php echo(date('Y/m/d')) ?>" required=""> </div>
             <div class="col-sm-2"></div>
-            <div class="col-sm-4"> <input placeholder="Arriving" type="date" name="arri" id="date-picker-example" class="form-control datepicker" style="font-family:Arial, FontAwesome" min="<?php echo(date('Y/m/d')) ?>"> </div>
+            <div class="col-sm-4"> <input placeholder="Arriving" type="date" name="arri" id="date-picker-example" class="form-control datepicker" style="font-family:Arial, FontAwesome" min="<?php echo(date('Y/m/d')) ?>" required=""> </div>
         </div>
         <!--Fourth Row-->
         <div class="row mt-4">
-            <div class="col-sm-2"> <input placeholder=" CountryCode" type="text" name="cc" id="cc" class="form-control mb-4" style="font-family:Arial, FontAwesome">  </div>
-            <div class="col-sm-4"> <input placeholder=" Mobile Number" type="text" id="num" name="phn" class="form-control mb-4" style="font-family:Arial, FontAwesome">  </div>
-            <div class="col-sm-4"> <input placeholder=" Email" type="email" id="mail" name="mail" class="form-control mb-4" style="font-family:Arial, FontAwesome">  </div>
+            <div class="col-sm-2"> <input placeholder=" CountryCode" type="text" name="cc" id="cc" class="form-control mb-4" style="font-family:Arial, FontAwesome" required="">  </div>
+            <div class="col-sm-4"> <input placeholder=" Mobile Number" type="text" id="num" name="phn" class="form-control mb-4" style="font-family:Arial, FontAwesome" required="">  </div>
+            <div class="col-sm-4"> <input placeholder=" Email" type="email" id="mail" name="mail" class="form-control mb-4" style="font-family:Arial, FontAwesome" required="">  </div>
         
         </div><br/>
         <!--Fifth Row-->
@@ -148,7 +148,7 @@ if(isset($_POST['submit']))
         <div class="row">
         
             <div class="col-sm-4"><h7 style="font-weight:bold;">Infant(0-5)</h7> 
-                 <select class="browser-default custom-select mb-4" name="infant" id="select">
+                 <select class="browser-default custom-select mb-4" name="infant" id="select" required="">
                     <option value="">Select</option>
                     <option value="0" >0</option>
                     <option value="1">1</option>
@@ -156,7 +156,7 @@ if(isset($_POST['submit']))
                     <option value="3">3</option>
                 </select> </div>
                 <div class="col-sm-4"><h6 style="font-weight:bold;">Child(5-15)</h6> 
-                 <select class="browser-default custom-select mb-4" name="child" id="select">
+                 <select class="browser-default custom-select mb-4" name="child" id="select" required="">
                     <option value="" >Select</option>
                     <option value="0" >0</option>
                     <option value="1">1</option>
@@ -164,7 +164,7 @@ if(isset($_POST['submit']))
                     <option value="3">3</option>
                 </select> </div>
                 <div class="col-sm-4"><h6 style="font-weight:bold;">Adult</h6> 
-                 <select class="browser-default custom-select mb-4" name="adult" id="select">
+                 <select class="browser-default custom-select mb-4" name="adult" id="select" required="">
                     <option value="">Select</option>
                     <option value="0" >0</option>
                     <option value="1">1</option>

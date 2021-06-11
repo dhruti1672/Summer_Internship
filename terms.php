@@ -70,9 +70,9 @@
             <br>
             <br>
 
-            <h5>Departure Date</h5>
+            <h5>Arrival Date</h5>
 
-            <p>The departure date is the date indicated on the booking confirmation.</p>
+            <p>The arrival date is the date indicated on the booking confirmation.</p>
             
             <br>
             <br>
